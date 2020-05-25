@@ -31,7 +31,7 @@ void loop() {
      if(value != input_pin_num[i-30])
      {
         send_protocol[0] = 0xFF;
-        send_protocol[1] = protocol_size;
+        send_protocol[1] = (unsigned char)protocol_size;
         send_protocol[2] = (unsigned char)i;
         send_protocol[3] = (unsigned char)value;
         send_protocol[4] = calcChecksum(send_protocol,protocol_size);
