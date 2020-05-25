@@ -39,6 +39,7 @@ void loop() {
         send_serial_protocol(send_protocol);
      }
   }
+  rev_serial();
 }
 
 unsigned char calcChecksum(unsigned char *data, int leng)
@@ -57,19 +58,23 @@ void send_serial_protocol(unsigned char send_protocol[])
     Serial.write(send_protocol,protocol_size);
 }
 
-void serial_Event()
+void rev_serial()
 {
-  unsigned char rev_start_protocol;
+  Serial.println("serial_event");
+  unsigned char rev_start_protocol = 0;
   unsigned char rev_protocol[protocol_size-1];
+  memset(rev_protocol,0,protocol_size-1);
   rev_start_protocol = Serial.read();
+  Serial.println(rev_start_protocol);
   
   if(rev_start_protocol == 0xFF)
   {
     Serial.readBytes(rev_protocol,protocol_size-1);
 
-    int pin_num  = rev_protocol[1];
-    int high_low = rev_protocol[2];
-
+    int pin_num  = rev_protocol[2];
+    int high_low = rev_protocol[3];
+    Serial.println(pin_num);
+    Serial.println(high_low);
     digitalWrite(pin_num,high_low);
   }
 }

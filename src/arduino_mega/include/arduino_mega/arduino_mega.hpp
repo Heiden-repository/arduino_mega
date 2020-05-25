@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 
-#include "std_msgs/Int8.h"
+#include "arduino_mega/arduino_output_signal.h"
 
 #include <fcntl.h> // Contains file controls like O_RDWR
 #include <errno.h> // Error integer and strerror() function
@@ -23,6 +23,47 @@
 #define rev_protocol_size_needed_data 4
 #define rev_protocol_start 0xFF
 
+#define GPIO_output_pin_two 0x02
+#define GPIO_output_pin_three 0x03
+#define GPIO_output_pin_four 0x04
+#define GPIO_output_pin_five 0x05
+#define GPIO_output_pin_six 0x06
+#define GPIO_output_pin_seven 0x07
+#define GPIO_output_pin_eight 0x08
+#define GPIO_output_pin_nine 0x09
+#define GPIO_output_pin_ten 0x0A
+#define GPIO_output_pin_eleven 0x0B
+#define GPIO_output_pin_twelve 0x0C
+#define GPIO_output_pin_thirteen 0x0D
+#define GPIO_output_pin_twentytwo 0x16
+#define GPIO_output_pin_twentythree 0x17
+#define GPIO_output_pin_twentyfour 0x18
+#define GPIO_output_pin_twentyfive 0x19
+#define GPIO_output_pin_twentysix 0x1A
+#define GPIO_output_pin_twentyseven 0x1B
+#define GPIO_output_pin_twentyeight 0x0C
+#define GPIO_output_pin_twentynine 0x0D
+
+#define GPIO_input_pin_thirty 0x1E
+#define GPIO_input_pin_thirtyone 0x1F
+#define GPIO_input_pin_thirtytwo 0x20
+#define GPIO_input_pin_thirtythree 0x21
+#define GPIO_input_pin_thirtyfour 0x22
+#define GPIO_input_pin_thirtyfive 0x23
+#define GPIO_input_pin_thirtysix 0x24
+#define GPIO_input_pin_thirtyseven 0x25
+#define GPIO_input_pin_thirtyeight 0x26
+#define GPIO_input_pin_thirtynine 0x27
+#define GPIO_input_pin_fourtyone 0x28
+#define GPIO_input_pin_fourtytwo 0x2A
+#define GPIO_input_pin_fourtythree 0x2B
+#define GPIO_input_pin_fourtyfour 0x2C
+#define GPIO_input_pin_fourtyfive 0x2D
+#define GPIO_input_pin_fourtysix 0x2E
+#define GPIO_input_pin_fourtyseven 0x2F
+#define GPIO_input_pin_fourtyeight 0x30
+#define GPIO_input_pin_fourtynine 0x31
+
 class Arduino_mega
 {
 private:
@@ -41,7 +82,7 @@ private:
     void initPublisher(void);
     void initSubscriber(void);
     bool serial_connect(void);
-    void send_serial(const std_msgs::Int8::ConstPtr &arduino_mega_msg);
+    void send_serial(const arduino_mega::arduino_output_signal::ConstPtr &arduino_mega_msg);
     bool send_protocol(unsigned char send_serial_protocol[]);
     void recieve_protocol(void);
 
