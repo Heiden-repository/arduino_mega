@@ -14,7 +14,7 @@
 #define protocol_size 5
 
 #define send_protocol_start 0xFF
-#define send_protocol_size 0x06
+#define send_protocol_size 0x05
 #define send_protocol_arduino_num_zero 0x00
 #define send_protocol_arduino_num_one 0x01
 #define send_protocol_low 0x00

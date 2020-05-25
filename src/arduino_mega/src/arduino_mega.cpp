@@ -69,9 +69,9 @@ void Arduino_mega::send_serial(const std_msgs::Int8::ConstPtr &arduino_uno_msg)
     // send_serial_protocol[4] = calcChecksum(send_serial_protocol,protocol_size);
 
     send_serial_protocol[0] = send_protocol_start;
-    send_serial_protocol[1] = send_protocol_size;
+    send_serial_protocol[1] = send_protocol_size; 
     send_serial_protocol[2] = 0x04;
-    send_serial_protocol[3] = send_protocol_high;
+    send_serial_protocol[3] = send_protocol_low;
     send_serial_protocol[4] = calcChecksum(send_serial_protocol,protocol_size);
 
     send_protocol(send_serial_protocol);
