@@ -17,7 +17,7 @@ void setup() {
   }
   for(int i=30; i<=49;i++)
   {
-    pinMode(i,INPUT);
+    pinMode(i,INPUT_PULLUP);
     input_pin_num[i-30] = 0;
   }
 }
