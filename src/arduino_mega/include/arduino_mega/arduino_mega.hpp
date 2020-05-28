@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 
-#include "arduino_mega/arduino_output_signal.h"
+#include <std_msgs/Int8MultiArray.h>
 
 #include <fcntl.h> // Contains file controls like O_RDWR
 #include <errno.h> // Error integer and strerror() function
@@ -82,7 +82,7 @@ private:
     void initPublisher(void);
     void initSubscriber(void);
     bool serial_connect(void);
-    void send_serial(const arduino_mega::arduino_output_signal::ConstPtr &arduino_mega_msg);
+    void send_serial(const std_msgs::Int8MultiArray::ConstPtr &arduino_mega_msg);
     bool send_protocol(unsigned char send_serial_protocol[]);
     void recieve_protocol(void);
 

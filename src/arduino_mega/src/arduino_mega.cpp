@@ -28,7 +28,7 @@ bool Arduino_mega::serial_connect(void)
 
     while (ros::ok())
     {
-        serial_port = open("/dev/ttyACM1", O_RDWR | O_NOCTTY);
+        serial_port = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);
         if (serial_port < 0)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -57,19 +57,23 @@ bool Arduino_mega::serial_connect(void)
     printf("Arduino_uno connection\n");
 }
 
-void Arduino_mega::send_serial(const arduino_mega::arduino_output_signal::ConstPtr &arduino_mega_msg)
+void Arduino_mega::send_serial(const std_msgs::Int8MultiArray::ConstPtr &arduino_mega_msg)
 {
     unsigned char send_serial_protocol[protocol_size];
     memset(send_serial_protocol, 0, protocol_size);
 
-    int pin_num = arduino_mega_msg->pin_num;
-    int high_low = arduino_mega_msg->high_low;
+    int pin_num = arduino_mega_msg->data[0];
+    int high_low = arduino_mega_msg->data[1];
+
+    printf("pin_num = %d high_low = %d\n",pin_num,high_low);
 
     send_serial_protocol[0] = send_protocol_start;
     send_serial_protocol[1] = send_protocol_size;
     send_serial_protocol[2] = (unsigned char)pin_num;
     send_serial_protocol[3] = (unsigned char)high_low;
     send_serial_protocol[4] = calcChecksum(send_serial_protocol,protocol_size);
+
+    printf("send_serial_protocol[2] = %u send_serial_protocol[3] = %u\n",send_serial_protocol[2],send_serial_protocol[3]);
 
     send_protocol(send_serial_protocol);
 

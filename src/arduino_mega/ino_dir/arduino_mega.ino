@@ -56,6 +56,7 @@ unsigned char calcChecksum(unsigned char *data, int leng)
 void send_serial_protocol(unsigned char send_protocol[])
 {
     Serial.write(send_protocol,protocol_size);
+    Serial.flush();
 }
 
 void rev_serial()
@@ -65,8 +66,11 @@ void rev_serial()
   unsigned char rev_protocol[protocol_size-1];
   memset(rev_protocol,0,protocol_size-1);
   rev_start_protocol = Serial.read();
-  Serial.println(rev_start_protocol);
   
+  if(rev_start_protocol == -1) return;
+  
+  //Serial.println(rev_start_protocol);
+
   if(rev_start_protocol == 0xFF)
   {
     Serial.readBytes(rev_protocol,protocol_size-1);
