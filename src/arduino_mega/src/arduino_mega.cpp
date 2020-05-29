@@ -28,7 +28,7 @@ bool Arduino_mega::serial_connect(void)
 
     while (ros::ok())
     {
-        serial_port = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);
+        serial_port = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY);
         if (serial_port < 0)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
